@@ -30,7 +30,8 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, "r", encoding= 'utf-8') as outfile:
                 new_obj = json.load(outfile)
-                for key, value in new_obj:
-                    self.__objects[key] = value
+                for value in new_obj.values():
+                    class_val = value["__class__"]
+                    self.new(eval(class_val)(**value))
     
     
