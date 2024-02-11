@@ -10,10 +10,10 @@ class HBNBCommand(cmd.Cmd):
     PROMPT = "(hbnb)"
 
     def do_EOF(self, line):
-        exit()
+        return True
 
     def do_quit(self, line):
-        exit()
+        return True
 
     def emptyline(self):
         pass
