@@ -20,15 +20,15 @@ class FileStorage:
         self.__objects[class_key] = obj
    
     def save(self):
-        with open(self.__file_path, "w") as outfile:
-            new_dict = {}
-            for key, value in self.__objects.items():
-                new_dict[key] = value
-                json.dump(new_dict, outfile)
+        new_dict = {}
+        for key, value in self.__objects.items():
+            new_dict[key] = value.to_dict()
+        with open(self.__file_path, "w", encoding= 'utf-8') as outfile:
+            json.dump(new_dict, outfile)
 
     def reload(self):
         if os.path.exists(self.__file_path):
-            with open(self.__file_path, "r") as outfile:
+            with open(self.__file_path, "r", encoding= 'utf-8') as outfile:
                 new_obj = json.load(outfile)
                 for key, value in new_obj:
                     self.__objects[key] = value
