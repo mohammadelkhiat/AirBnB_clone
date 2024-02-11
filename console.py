@@ -6,6 +6,7 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """class defintion"""
+
     PROMPT = "(hbnb)"
 
     def do_EOF(self, line):
@@ -17,5 +18,5 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    if __name__ == '__main__':
-        HBNBCommand().cmdloop()
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
