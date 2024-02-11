@@ -32,18 +32,25 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-    def do_show(self, arg, id):
-        if not arg:
+    def do_show(self, arg):
+        args = arg.split(' ')
+        
+        if not args[0]:
             print("** class name missing **")
-        elif arg not in self.classes:
+            return
+        if args[0] not in self.classes:
             print("** class doesn't exist **")
-        elif not id:
+            return
+        if not args or len(args) < 2 or not args[1]:
             print("** instance id missing **")
-        elif id not in self.classes[arg]().id:
+            return
+        if args[1] not in self.classes:
             print("** no instance found **")
-        else:
-            rtrn = models.storage.all()
-            print(rtrn)
+            return
+        
+
+        rtrn = models.storage.all()
+        print(rtrn)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

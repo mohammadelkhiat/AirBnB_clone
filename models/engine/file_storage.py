@@ -3,6 +3,7 @@
 
 import json
 import os
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -30,6 +31,6 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, "r", encoding='utf-8') as outfile:
                 new_obj = json.load(outfile)
-                for value in new_obj.values():
-                    class_val = value["__class__"]
-                    self.new(eval(class_val)(**value))
+            for value in new_obj.values():
+                class_val = value["__class__"]
+                self.new(eval(class_val)(**value))
