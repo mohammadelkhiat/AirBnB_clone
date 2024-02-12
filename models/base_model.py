@@ -7,12 +7,9 @@ import models
 
 
 class BaseModel:
-    
+
     def __init__(self, *args, **kwargs):
-        """BaseModel class that defines all 
-        common attributes/methods for other classes
-        
-        """
+
         if len(kwargs) > 0:
             for key, value in kwargs.items():
                 if key == 'id':
@@ -26,7 +23,7 @@ class BaseModel:
                 if key == 'updated_at':
                     self.updated_at = datetime.fromisoformat(value)
                     continue
-                    
+
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
