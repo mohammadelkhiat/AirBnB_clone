@@ -28,10 +28,15 @@ class FileStorage:
         with open(self.__file_path, "w", encoding='utf-8') as outfile:
             json.dump(new_dict, outfile)
 
-    def reload(self):
+def reload(self):
+        classes = {
+            "BaseModel": BaseModel,
+            "User": User,
+        }
         if os.path.exists(self.__file_path):
-            with open(self.__file_path, "r", encoding='utf-8') as outfile:
-                new_obj = json.load(outfile)
-            for value in new_obj.values():
-                class_val = value["__class__"]
-                self.new(eval(class_val)(**value))
+            with open(self.__file_path, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+
+            for key, value in data.items():
+                class_name, obj_id = key.split('.')
+                obj = classes[class_name](**value)
