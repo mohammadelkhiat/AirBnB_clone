@@ -6,7 +6,8 @@ import models
 
 
 class Review(BaseModel):
-    """Review class that inherit from BaseModel classe"""
+    """Review class that inherit from BaseModel class
+    """
     place_id = ""
     user_id = ""
     text = ""
