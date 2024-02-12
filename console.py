@@ -22,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    classes = {"BaseModel": BaseModel, "User": user}
+    classes = {"BaseModel": BaseModel}
 
     def do_create(self, arg):
         if not arg:
