@@ -4,6 +4,7 @@
 import cmd
 import models.engine
 from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -44,13 +45,50 @@ class HBNBCommand(cmd.Cmd):
         if not args or len(args) < 2 or not args[1]:
             print("** instance id missing **")
             return
-        if args[1] not in self.classes:
+        
+        rtrn = models.storage.all()
+        if args[0] + '.' + args[1] not in rtrn:
             print("** no instance found **")
             return
+        print(rtrn.get(args[0] + '.' + args[1]))
         
-
+    def do_destroy(self, arg):
+        args = arg.split(' ')
+        
+        if not args[0]:
+            print("** class name missing **")
+            return
+        if args[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if not args or len(args) < 2 or not args[1]:
+            print("** instance id missing **")
+            return
+        if args[0] + '.' + args[1] not in storage.all():
+            print("** no instance found **")
+            return
+        del_instance = args[0] + '.' + args[1]
+        del storage.all()[del_instance]
+        storage.save()
+    
+    def do_all(self, arg):
+        args = arg.split(' ')
         rtrn = models.storage.all()
-        print(rtrn)
+        list_all = []
+
+        if not arg:
+            for i in rtrn.values():
+                list_all.append(str(i))
+        elif args[0] not in self.classes :
+            print("** class doesn't exist **")
+            return
+        else:
+            for i in rtrn.values():
+                list_all.append(str(i))
+        print(list_all)
+
+        
+        
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
