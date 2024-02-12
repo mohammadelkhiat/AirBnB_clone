@@ -87,8 +87,31 @@ class HBNBCommand(cmd.Cmd):
                 list_all.append(str(i))
         print(list_all)
 
-        
-        
+    def do_update(self, arg):
+        args = arg.split()
+        objects = storage.all()
+
+        if not arg:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            if key not in objects:
+                print("** no instance found **")
+            else:
+                obj = objects[key]
+                attr_name = args[2]
+                attr_value = args[3]
+                setattr(obj, attr_name, attr_value)
+                obj.save
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
