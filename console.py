@@ -3,8 +3,15 @@
 
 import cmd
 import models.engine
-from models.base_model import BaseModel
 from models import storage
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
     """class defintion"""
@@ -20,7 +27,9 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    classes = {"BaseModel": BaseModel}
+    classes = {"User": User, "State": State, "BaseModel": BaseModel,
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
 
     def do_create(self, arg):
         if not arg:
