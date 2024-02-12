@@ -35,12 +35,12 @@ class FileStorage:
 
     def reload(self):
         obb = {"User": User, "State": State, "BaseModel": BaseModel,
-            "City": City, "Amenity": Amenity, "Place": Place,
-            "Review": Review}
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
         if os.path.exists(self.__file_path):
             with open(self.__file_path, "r", encoding='utf-8') as outfile:
                 new_obj = json.load(outfile)
             for k, value in new_obj.items():
-               clas = value["__class__"]
-               obj = eval(clas + "(**value)")
-               FileStorage.__objects[k] = obj
+                clas = value["__class__"]
+                obj = eval(clas + "(**value)")
+                FileStorage.__objects[k] = obj
