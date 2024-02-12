@@ -2,7 +2,6 @@
 '''city model class'''
 
 from models.base_model import BaseModel
-import models
 
 
 class City(BaseModel):

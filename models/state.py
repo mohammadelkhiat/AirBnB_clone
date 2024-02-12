@@ -2,7 +2,6 @@
 '''state model class'''
 
 from models.base_model import BaseModel
-import models
 
 
 class State(BaseModel):
