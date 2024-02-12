@@ -5,8 +5,6 @@ import cmd
 import models.engine
 from models.base_model import BaseModel
 from models import storage
-from models import user
-
 
 class HBNBCommand(cmd.Cmd):
     """class defintion"""
