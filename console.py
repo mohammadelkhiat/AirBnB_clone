@@ -5,6 +5,7 @@ import cmd
 import models.engine
 from models.base_model import BaseModel
 from models import storage
+from models import user
 
 
 class HBNBCommand(cmd.Cmd):
@@ -21,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    classes = {"BaseModel": BaseModel}
+    classes = {"BaseModel": BaseModel, "User": user}
 
     def do_create(self, arg):
         if not arg:
