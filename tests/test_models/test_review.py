@@ -1,28 +1,28 @@
 #!/usr/bin/python3
-"""unittest cases for the base model class"""
+"""unittest cases for the Review model class"""
 
 
 import unittest
-from models.base_model import BaseModel
+from models.review import Review
 from datetime import datetime
 import time
 
 
-class TestBaseModel(unittest.TestCase):
-    """To consider all the possible test cases"""
+class TestReviewModel(unittest.TestCase):
+    '''the class of test cases for the Review model class'''
 
     def test_id_is_string(self):
         """
         Test that the 'id' attribute is a string.
         """
-        obj = BaseModel()
+        obj = Review()
         self.assertIsInstance(obj.id, str)
 
     def test_id_uniqueness(self):
         """
         Test the uniqueness of the 'id' attribute.
         """
-        instances = [BaseModel() for _ in range(5)]
+        instances = [Review() for _ in range(5)]
         id_set = set(instance.id for instance in instances)
         self.assertEqual(len(id_set), len(instances))
 
@@ -31,7 +31,7 @@ class TestBaseModel(unittest.TestCase):
         Test that 'created_at' and 'updated_at'
         are instances of datetime.
         """
-        obj = BaseModel()
+        obj = Review()
         self.assertIsInstance(obj.created_at, datetime)
         self.assertIsInstance(obj.updated_at, datetime)
 
@@ -41,7 +41,7 @@ class TestBaseModel(unittest.TestCase):
         set to the current datetime upon creation.
         """
         current_time = datetime.now()
-        obj = BaseModel()
+        obj = Review()
 
         time_difference_created = current_time - obj.created_at
         time_difference_updated = current_time - obj.updated_at
@@ -54,7 +54,7 @@ class TestBaseModel(unittest.TestCase):
         Test that 'updated_at' is updated when
         'save' is called, but 'created_at' remains the same.
         """
-        obj = BaseModel()
+        obj = Review()
         initial_updated_at = obj.updated_at
         initial_created_at = obj.created_at
 
@@ -80,7 +80,7 @@ class TestBaseModel(unittest.TestCase):
         Test the structure of the returned
         dictionary when calling 'to_dict'.
         """
-        obj = BaseModel()
+        obj = Review()
         obj_dict = obj.to_dict()
 
         self.assertIsInstance(obj_dict, dict)
@@ -94,7 +94,7 @@ class TestBaseModel(unittest.TestCase):
         Test that 'id' in the dictionary
         matches the 'id' attribute of the instance.
         """
-        obj = BaseModel()
+        obj = Review()
         obj_dict = obj.to_dict()
 
         self.assertEqual(obj_dict['id'], obj.id)
@@ -104,21 +104,21 @@ class TestBaseModel(unittest.TestCase):
         Test that 'created_at' and 'updated_at'
         in the dictionary are in ISO format.
         """
-        obj = BaseModel()
+        obj = Review()
         obj_dic = obj.to_dict()
 
         iso = "%Y-%m-%dT%H:%M:%S.%f"
-        create_dic = datetime.strptime(obj_dic['created_at'], iso)
-        self.assertEqual(create_dic, obj.created_at)
+        create_FromDic = datetime.strptime(obj_dic['created_at'], iso)
+        self.assertEqual(create_FromDic, obj.created_at)
 
     def test_class_in_dict_matches_instance_class(self):
         """
         Test that '__class__' in the dictionary
         matches the class name of the instance.
         """
-        obj = BaseModel()
+        obj = Review()
         obj_dict = obj.to_dict()
-        self.assertEqual(obj_dict['__class__'], 'BaseModel')
+        self.assertEqual(obj_dict['__class__'], 'Review')
 
     def test_only_instance_attributes_in_dict(self):
         """
@@ -126,7 +126,7 @@ class TestBaseModel(unittest.TestCase):
         are included in the dictionary.
         """
         custom_attribute = "Custom Value"
-        obj = BaseModel()
+        obj = Review()
         obj.custom_attribute = custom_attribute
         obj_dict = obj.to_dict()
 
@@ -134,23 +134,23 @@ class TestBaseModel(unittest.TestCase):
 
     def test_default_str_output(self):
         """
-        Test the default __str__ output of the BaseModel class.
+        Test the default __str__ output of the Review class.
         """
-        obj = BaseModel()
+        obj = Review()
         str_output = str(obj)
-        expected_output = f"[BaseModel] ({obj.id}) {obj.__dict__}"
+        expected_output = f"[Review] ({obj.id}) {obj.__dict__}"
 
         self.assertEqual(str_output, expected_output)
 
     def test_create_instance_from_dict(self):
         """
-        Test creating a BaseModel instance from a
+        Test creating a Review instance from a
         dictionary representation.
         """
-        my_obj = BaseModel()
+        my_obj = Review()
         obj_dict = my_obj.to_dict()
 
-        obj = BaseModel(**obj_dict)
+        obj = Review(**obj_dict)
 
         self.assertEqual(obj.__class__.__name__, obj_dict['__class__'])
         self.assertEqual(obj.created_at.isoformat(), obj_dict['created_at'])
