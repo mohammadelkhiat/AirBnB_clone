@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         args = arg.split(' ')
-        
+
         if not args[0]:
             print("** class name missing **")
             return
@@ -53,16 +53,16 @@ class HBNBCommand(cmd.Cmd):
         if not args or len(args) < 2 or not args[1]:
             print("** instance id missing **")
             return
-        
+
         rtrn = models.storage.all()
         if args[0] + '.' + args[1] not in rtrn:
             print("** no instance found **")
             return
         print(rtrn.get(args[0] + '.' + args[1]))
-        
+
     def do_destroy(self, arg):
         args = arg.split(' ')
-        
+
         if not args[0]:
             print("** class name missing **")
             return
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         del_instance = args[0] + '.' + args[1]
         del storage.all()[del_instance]
         storage.save()
-    
+
     def do_all(self, arg):
         args = arg.split(' ')
         rtrn = models.storage.all()
@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             for i in rtrn.values():
                 list_all.append(str(i))
-        elif args[0] not in self.classes :
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
             return
         else:
